@@ -38,6 +38,7 @@ class Home extends Component {
       // url += '&scope=' + encodeURIComponent(scope);
       url += '&redirect_uri=' + encodeURIComponent(env.SPOTIFY_REDIRECT_URL);
       url += '&state=' + encodeURIComponent(state);
+      delete sessionStorage.yc_shawn_spotify;
       window.location = url;
     }
 
@@ -46,7 +47,7 @@ class Home extends Component {
   render(){
     return (
       <div>
-
+        Home
       </div>
     )
   }

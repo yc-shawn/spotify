@@ -9,7 +9,7 @@ export default class RouterComponent extends Component {
   render() {
     return (
       <Router>
-        <div>
+        <div class="body" style={{backgroundImage: `url('${env.assets}img/guitar-wallpaper.jpg')`}}>
           <Route exact path="/" component={Home} />
           <Route path="/about" component={About} />
         </div>
