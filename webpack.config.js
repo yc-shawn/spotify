@@ -38,7 +38,10 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       "env": {
-        "debug": JSON.parse(process.env.DEBUG)
+        "debug": JSON.parse(process.env.DEBUG),
+        "SPOTIFY_CLIENT_ID": JSON.stringify(process.env.SPOTIFY_CLIENT_ID),
+        "SPOTIFY_CLIENT_SECRET": JSON.stringify(process.env.SPOTIFY_CLIENT_SECRET),
+        "SPOTIFY_REDIRECT_URL": JSON.stringify(process.env.SPOTIFY_REDIRECT_URL)
       }
     })
   ]

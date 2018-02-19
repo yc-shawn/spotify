@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
+import promise from "redux-promise";
 import { applyMiddleware, createStore } from "redux";
 import thunkMiddleware from 'redux-thunk';
 
@@ -12,6 +13,7 @@ import reducers from './reducers';
 import './styles/index.sass'
 
 const createStoreWithMiddleware = applyMiddleware(
+  promise,
   thunkMiddleware
 )(createStore);
 
