@@ -10,6 +10,7 @@ import RouterComponent from './router';
 import reducers from './reducers';
 
 // Styles
+import 'antd/dist/antd.css';
 import './styles/index.sass'
 
 const createStoreWithMiddleware = applyMiddleware(
