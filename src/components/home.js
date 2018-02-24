@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
-import { Input, Select, Icon, Button } from 'antd';
+import { Input, Select, Icon, Button, List, Avatar } from 'antd';
 const Search = Input.Search;
 const Option = Select.Option;
 
@@ -11,7 +11,7 @@ import { setAuth, newAuth } from '../actions/auth.action';
 class Home extends Component {
   constructor(props){
     super(props);
-    this.state = {type: 'artist'}
+    this.state = {type: 'artist', list: []}
     let searchDebounce;
   }
   componentWillMount(){
@@ -51,6 +51,7 @@ class Home extends Component {
         }
       }).then((res) => {
         console.log(res.data);
+        this.setState({list: res.data[`${this.state.type}s`].items})
       });
     }, 333);
   }
@@ -70,6 +71,20 @@ class Home extends Component {
               </Select>
             }
             suffix={<Icon type="search" />}/>
+          {this.state.list && this.state.list.length > 0 ?
+            <List
+              class="search-result-list"
+              dataSource={this.state.list}
+              renderItem={item => (
+                <List.Item key={item.id}>
+                  <List.Item.Meta
+                    avatar={item.images && item.images[0] ? <Avatar src={item.images[0].url} /> : null}
+                    title={item.name}
+                  />
+                </List.Item>
+              )}
+            /> : null
+          }
         </section>
       </main>
     )
