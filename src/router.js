@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Home from './components/home';
 import About from './components/about';
@@ -13,6 +13,7 @@ export default class RouterComponent extends Component {
         <Switch>
           <div class="body" style={{backgroundImage: `url('${env.assets}img/guitar-wallpaper.jpg')`}}>
             <Route exact path="/" component={Home} />
+            <Route exact path="/:authstring" component={Auth} />
             <Route exact path="/auth" component={Auth} />
             <Route path="/about" component={About} />
           </div>

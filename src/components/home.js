@@ -37,18 +37,22 @@ class Home extends Component {
     let { token_type, access_token} = this.props.auth;
     clearTimeout(this.searchDebounce);
     this.searchDebounce = setTimeout(() => {
-      axios.get('https://api.spotify.com/v1/search', {
-        params: {
-          type: this.state.type,
-          q: this.refs.search.input.value
-        },
-        headers:{
-          Authorization: `${token_type} ${access_token}`
-        }
-      }).then((res) => {
-        console.log(res.data);
-        this.setState({list: res.data[`${this.state.type}s`].items})
-      });
+      if (this.refs.search.input.value){
+        axios.get('https://api.spotify.com/v1/search', {
+          params: {
+            type: this.state.type,
+            q: this.refs.search.input.value
+          },
+          headers:{
+            Authorization: `${token_type} ${access_token}`
+          }
+        }).then((res) => {
+          console.log(res.data);
+          this.setState({list: res.data[`${this.state.type}s`].items})
+        });
+      } else {
+        this.setState({list: []})
+      }
     }, 333);
   }
 
