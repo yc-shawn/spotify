@@ -21,10 +21,6 @@ class Home extends Component {
     sessionStorage.setItem(stateKey, state);
     if (sessionStorage.yc_shawn_spotify){
       setAuth(JSON.parse(sessionStorage.yc_shawn_spotify));
-    } else if (location.hash.length > 0){
-      console.log(location.hash);
-      newAuth(location.hash);
-      history.replace('');
     } else {
       // var scope = 'user-read-private user-read-email';
       var url = 'https://accounts.spotify.com/authorize';
