@@ -13,16 +13,18 @@ class Home extends Component {
     super(props);
   }
   componentWillMount(){
-    let { newAuth, match, history} = this.props;
-    let authString = match.params.authstring;
-    if (authString.includes('yc-shawn-spotify')){
-      newAuth(authString);
+    let { auth, newAuth, match, history} = this.props;
+    if (!auth || !auth.access_token){
+      let authString = match.params.authstring;
+      if (authString.includes('yc-shawn-spotify')){
+        newAuth(authString);
+      }
+      history.replace('');
     }
-    history.replace('');
   }
   render(){
     return (
-      <main style={{color: 'white'}}>authing...</main>
+      <main style={{color: 'white'}}></main>
     )
   }
 }
