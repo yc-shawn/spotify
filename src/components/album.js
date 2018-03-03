@@ -7,6 +7,9 @@ class Album extends Component {
   }
 
   render(){
+    let { album } = this.props;
+    console.log(album);
+
     return (
       <div>Album</div>
     )
@@ -14,7 +17,7 @@ class Album extends Component {
 }
 
 function mapStateToProps(state){
-  return { auth: state.auth }
+  return { album: state.album }
 }
 
 export default connect(mapStateToProps, {})(Album);

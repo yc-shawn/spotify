@@ -7,6 +7,9 @@ class Track extends Component {
   }
 
   render(){
+    let { track } = this.props;
+    console.log(track);
+
     return (
       <div>Track</div>
     )
@@ -14,7 +17,7 @@ class Track extends Component {
 }
 
 function mapStateToProps(state){
-  return { auth: state.auth }
+  return { track: state.track }
 }
 
 export default connect(mapStateToProps, {})(Track);

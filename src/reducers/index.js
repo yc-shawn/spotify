@@ -3,10 +3,16 @@ import { combineReducers } from 'redux';
 // reducers
 import ExampleReducer from './example.reducer';
 import AuthReducer from './auth.reducer';
+import ArtistReducer from './artist.reducer';
+import AlbumReducer from './album.reducer';
+import TrackReducer from './track.reducer';
 
 const rootReducer = combineReducers({
   example: ExampleReducer,
-  auth: AuthReducer
+  auth: AuthReducer,
+  artist: ArtistReducer,
+  album: AlbumReducer,
+  track: TrackReducer
 });
 
 export default rootReducer;
