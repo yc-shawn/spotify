@@ -55,6 +55,9 @@ class Home extends Component {
       }
     }, 333);
   }
+  navigateTo(){
+    this.props.history.push(this.state.type)
+  }
 
   render(){
     return (
@@ -76,7 +79,7 @@ class Home extends Component {
               class="search-result-list"
               dataSource={this.state.list}
               renderItem={item => (
-                <List.Item key={item.id}>
+                <List.Item key={item.id} onClick={()=>this.navigateTo()}>
                   <List.Item.Meta
                     avatar={item.images && item.images[0] ? <Avatar src={item.images[0].url} /> : null}
                     title={item.name}
