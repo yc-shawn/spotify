@@ -5,7 +5,7 @@ import { Input, Select, Icon, Button } from 'antd';
 const Search = Input.Search;
 const Option = Select.Option;
 
-import { setAuth, newAuth } from '../actions/auth.action';
+import { setAuth, newAuth } from '../actions';
 
 class Home extends Component {
   constructor(props){

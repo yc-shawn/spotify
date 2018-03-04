@@ -6,10 +6,7 @@ import { Input, Select, Icon, Button, List, Avatar } from 'antd';
 const Search = Input.Search;
 const Option = Select.Option;
 
-import { setAuth, newAuth } from '../actions/auth.action';
-import { setArtist } from '../actions/artist.action';
-import { setAlbum } from '../actions/album.action';
-import { setTrack } from '../actions/track.action';
+import { setAuth, newAuth, setArtist, setAlbum, setTrack } from '../actions';
 
 class Home extends Component {
   constructor(props){
@@ -18,7 +15,7 @@ class Home extends Component {
     let searchDebounce;
   }
   componentWillMount(){
-    let { setAuth, newAuth, location, history} = this.props;
+    let { setAuth, newAuth, location, history } = this.props;
     let stateKey = 'spotify_auth_state';
     let state = 'yc-shawn-spotify';
     sessionStorage.setItem(stateKey, state);
@@ -37,7 +34,7 @@ class Home extends Component {
     }
   }
   onSearch(text){
-    let { token_type, access_token} = this.props.auth;
+    let { token_type, access_token } = this.props.auth;
     let { type } = this.state;
     clearTimeout(this.searchDebounce);
     this.searchDebounce = setTimeout(() => {

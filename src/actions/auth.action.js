@@ -3,7 +3,7 @@ import axios from 'axios';
 export const SET_AUTH = "SET_AUTH"
 export function setAuth(authObj){
   console.log('DO have auth:', authObj);
-  _getHttpHeader(authObj);
+  _setHttpHeader(authObj);
   return {
     type: SET_AUTH,
     payload: authObj
@@ -20,7 +20,7 @@ export function newAuth(hashString){
   })
   sessionStorage.setItem('yc_shawn_spotify', JSON.stringify(authObj));
   console.log('GET new auth:', authObj);
-  _getHttpHeader(authObj);
+  _setHttpHeader(authObj);
   return {
     type: NEW_AUTH,
     payload: authObj
@@ -28,7 +28,7 @@ export function newAuth(hashString){
 }
 
 
-function _getHttpHeader(authObj){
+function _setHttpHeader(authObj){
   let { token_type, access_token} = authObj;
   axios.defaults.headers.common['Authorization'] = `${token_type} ${access_token}`;
 }
