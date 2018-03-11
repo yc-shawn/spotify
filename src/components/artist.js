@@ -7,6 +7,8 @@ class Artist extends Component {
   }
 
   render(){
+    let { artist } = this.props;
+    console.log(artist);
     return (
       <div>Artist</div>
     )
@@ -14,7 +16,7 @@ class Artist extends Component {
 }
 
 function mapStateToProps(state){
-  return { auth: state.auth }
+  return { artist: state.artist }
 }
 
 export default connect(mapStateToProps, {})(Artist);

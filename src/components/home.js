@@ -6,7 +6,7 @@ import { Input, Select, Icon, Button, List, Avatar } from 'antd';
 const Search = Input.Search;
 const Option = Select.Option;
 
-import { setAuth, newAuth } from '../actions/auth.action';
+import { setAuth, newAuth, setArtist, setAlbum, setTrack } from '../actions';
 
 class Home extends Component {
   constructor(props){
@@ -15,7 +15,7 @@ class Home extends Component {
     let searchDebounce;
   }
   componentWillMount(){
-    let { setAuth, newAuth, location, history} = this.props;
+    let { setAuth, newAuth, location, history } = this.props;
     let stateKey = 'spotify_auth_state';
     let state = 'yc-shawn-spotify';
     sessionStorage.setItem(stateKey, state);
@@ -34,26 +34,32 @@ class Home extends Component {
     }
   }
   onSearch(text){
-    let { token_type, access_token} = this.props.auth;
+    let { token_type, access_token } = this.props.auth;
+    let { type } = this.state;
     clearTimeout(this.searchDebounce);
     this.searchDebounce = setTimeout(() => {
       if (this.refs.search.input.value){
         axios.get('https://api.spotify.com/v1/search', {
           params: {
-            type: this.state.type,
+            type: type,
             q: this.refs.search.input.value
-          },
-          headers:{
-            Authorization: `${token_type} ${access_token}`
           }
         }).then((res) => {
           console.log(res.data);
-          this.setState({list: res.data[`${this.state.type}s`].items})
+          this.setState({list: res.data[`${type}s`].items})
         });
       } else {
         this.setState({list: []})
       }
     }, 333);
+  }
+  navigateTo(item){
+    let { type } = this.state;
+    let { setArtist, setAlbum, setTrack} = this.props;
+    if (type === 'artist') setArtist(item.id);
+    else if (type === 'album') setAlbum(item.id);
+    else if (type === 'track') setTrack(item.id);
+    this.props.history.push(type);
   }
 
   render(){
@@ -76,7 +82,7 @@ class Home extends Component {
               class="search-result-list"
               dataSource={this.state.list}
               renderItem={item => (
-                <List.Item key={item.id}>
+                <List.Item key={item.id} onClick={()=>this.navigateTo(item)}>
                   <List.Item.Meta
                     avatar={item.images && item.images[0] ? <Avatar src={item.images[0].url} /> : null}
                     title={item.name}
@@ -95,4 +101,10 @@ function mapStateToProps(state){
   return { auth: state.auth }
 }
 
-export default connect(mapStateToProps, {setAuth, newAuth})(Home);
+export default connect(mapStateToProps, {
+  setAuth,
+  newAuth,
+  setArtist,
+  setAlbum,
+  setTrack
+})(Home);
