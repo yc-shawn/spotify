@@ -7,7 +7,15 @@ export function setArtist(id){
   const getPayload = (id) => new Promise((resolve, reject) => {
     axios
       .get(`https://api.spotify.com/v1/artists/${id}`)
-      .then(res => resolve(res.data))
+      .then(artistRes => {
+        axios
+          .get(`https://api.spotify.com/v1/artists/${id}/albums`)
+          .then((res) => {
+            let artist = artistRes.data;
+            artist.albums = res.data;
+            resolve(artist);
+          })
+      })
       .catch(err => reject(err));
   });
 
