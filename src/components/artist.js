@@ -42,7 +42,7 @@ class Artist extends Component {
             { artist.albums && artist.albums.items.map(album =>
                 <Card
                   hoverable
-                  class="mb-3"
+                  class="album-card mb-3"
                   style={{ width: 240 }}
                   cover={album.images && <img src={album.images[0].url} />}
                   key={album.id}
