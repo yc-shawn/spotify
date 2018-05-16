@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Card } from 'antd';
 const { Meta } = Card;
 import axios from 'axios';
+import { setAlbum } from '../actions';
 
 class Artist extends Component {
   constructor(){
@@ -10,14 +11,10 @@ class Artist extends Component {
     this.state = {albums: []};
   }
   componentWillMount(){
-    let { artist } = this.props;
-    if (artist && artist.id){
-      axios
-        .get(`https://api.spotify.com/v1/artists/${artist.id}/albums`)
-        .then((res) => {
-          console.log(res.data);
-        });
-    }
+  }
+  toAlbum(id){
+    this.props.setAlbum(id);
+    this.props.history.push('album');
   }
 
   render(){
@@ -46,6 +43,7 @@ class Artist extends Component {
                   style={{ width: 240 }}
                   cover={album.images && <img src={album.images[0].url} />}
                   key={album.id}
+                  onClick={() => this.toAlbum(album.id)}
                 > <Meta title={album.name} />
                 </Card>
               )
@@ -61,4 +59,4 @@ function mapStateToProps(state){
   return { artist: state.artist }
 }
 
-export default connect(mapStateToProps, {})(Artist);
+export default connect(mapStateToProps, {setAlbum})(Artist);
