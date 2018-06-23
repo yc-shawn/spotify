@@ -14,6 +14,7 @@ export default class RouterComponent extends Component {
       <Router>
         <Switch>
           <div class="body" style={{backgroundImage: `url('${env.assets}img/guitar-wallpaper.jpg')`}}>
+          {/* <div class="body"> */}
             <Route exact path="/" component={Home} />
             <Route path="/:authstring" component={Auth} />
             <Route path="/auth" component={Auth} />

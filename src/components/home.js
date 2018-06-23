@@ -56,9 +56,15 @@ class Home extends Component {
   navigateTo(item){
     let { type } = this.state;
     let { setArtist, setAlbum, setTrack} = this.props;
-    if (type === 'artist') setArtist(item.id);
-    else if (type === 'album') setAlbum(item.id);
-    else if (type === 'track') setTrack(item.id);
+    if (type === 'track') {
+      // setTrack(item.id)
+      window.open(item.external_urls.spotify);
+      return;
+    } else if (type === 'artist') {
+      setArtist(item.id);
+    } else if (type === 'album') {
+      setAlbum(item.id);
+    }
     this.props.history.push(type);
   }
 

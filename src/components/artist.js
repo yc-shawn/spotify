@@ -21,34 +21,35 @@ class Artist extends Component {
     let { artist } = this.props;
     console.log('artist:', artist);
     return (
-      <div class="artist-page container py-5 d-flex">
-        <Card
-          hoverable
-          style={{ width: 240 }}
-          cover={artist.images && <img src={artist.images[0].url} />}
-          class="artist-info"
-        >
-          <Meta
-            title={artist.name}
-            description="www.instagram.com"
-          />
-        </Card>
+      <div class="artist-page">
+        <section class="container py-5 d-flex">
+          <Card
+            hoverable
+            style={{ width: 240 }}
+            cover={artist.images && <img src={artist.images[0].url} />}
+            class="artist-info"
+          >
+            <Meta
+              title={artist.name}
+            />
+          </Card>
 
-        <section class="artist-albums-container">
-          <div class="artist-albums-list">
-            { artist.albums && artist.albums.items.map(album =>
-                <Card
-                  hoverable
-                  class="album-card mb-3"
-                  style={{ width: 240 }}
-                  cover={album.images && <img src={album.images[0].url} />}
-                  key={album.id}
-                  onClick={() => this.toAlbum(album.id)}
-                > <Meta title={album.name} />
-                </Card>
-              )
-            }
-          </div>
+          <section class="artist-albums-container">
+            <div class="artist-albums-list">
+              { artist.albums && artist.albums.items.map(album =>
+                  <Card
+                    hoverable
+                    class="album-card mb-3"
+                    style={{ width: 240 }}
+                    cover={album.images && <img src={album.images[0].url} />}
+                    key={album.id}
+                    onClick={() => this.toAlbum(album.id)}
+                  > <Meta title={album.name} />
+                  </Card>
+                )
+              }
+            </div>
+          </section>
         </section>
       </div>
     )
